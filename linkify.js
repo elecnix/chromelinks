@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 function linkify() {
-  var regex = [ new RegExp("(bug[ #]*)(\\d+)", "ig") , "<a href='http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=$2'>$1$2</a>" ];
+  var regex = [ new RegExp("(issue|bz|bug)([ #]*)(\\d+)", "ig") , "<a href='http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=$3'>$1$2$3</a>" ];
   linkifyNodes(document, regex)
 }
 
@@ -25,7 +25,10 @@ function linkifyNodes(element, regex) {
   traverse(element, function(elem) {
     if (elem.nodeType == Node.TEXT_NODE) {
       linkifyTextNode(elem, regex);
-    } else if (elem.tagName != "SCRIPT" && elem.tagName != "A") {
+    } else if (elem.tagName != "SCRIPT"
+        && elem.tagName != "STYLE"
+        && elem.tagName != "TEXTAREA"
+        && elem.tagName != "A") {
       return true;
     }
     return false;
