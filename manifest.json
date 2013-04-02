@@ -1,0 +1,12 @@
+{
+  "name": "Debian Bug Links",
+  "description": "Make textual Debian bug mentions clickable.",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["linkify.js"]
+    }
+  ],
+  "manifest_version": 2
+}
